@@ -19,6 +19,11 @@ export default function DemoPage() {
         setLoading2(false);
     };
 
+    // Client error throws in the browser
+    const handleClientError = () => {
+        throw new Error("Client error: Something went wrong in the browser!");
+    };
+
     return (
         <div className="p-8 space-x-4">
             <Button disabled={loading} onClick={handleBlocking}>
