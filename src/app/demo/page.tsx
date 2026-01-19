@@ -19,9 +19,19 @@ export default function DemoPage() {
         setLoading2(false);
     };
 
-    // Client error throws in the browser
+    // 1) Client error throws in the browser
     const handleClientError = () => {
         throw new Error("Client error: Something went wrong in the browser!");
+    };
+
+    // 2) API error - triggers server-side error
+    const handleApiError = async () => {
+        await fetch("/api/demo/error", { method: "POST" });
+    };
+
+    // 3) Inngest error - triggers error in background job
+    const handleInngestError = async () => {
+        await fetch("/api/demo/inngest-error", { method: "POST" });
     };
 
     return (
@@ -31,6 +41,15 @@ export default function DemoPage() {
             </Button>
             <Button disabled={loading2} onClick={handleBackground}>
                 {loading2 ? "Loading..." : "Background"}
+            </Button>
+            <Button variant="destructive" onClick={handleClientError}>
+                Client Error
+            </Button>
+            <Button variant="destructive" onClick={handleApiError}>
+                API Error
+            </Button>
+            <Button variant="destructive" onClick={handleInngestError}>
+                Inngest Error
             </Button>
         </div>
     );
